@@ -22,6 +22,17 @@ def print_ui():
     userinput = input("Velg mellom 1-6: ")
     return userinput
 
+def print_ui_guest():
+    os.system("cls")
+    print("--------------------------------------------------------------")
+    print("Velkommen til Varehaandteringssystemet")
+    print("1. Vis alle varer")
+    print("2. Finn en vare")
+    print("3. Avslutt")
+    print("--------------------------------------------------------------")
+    userinput = input("Velg mellom 1-3: ")
+    return userinput
+
 def strek():
     print("--------------------------------------------------------------")
 
@@ -48,7 +59,7 @@ def alle_varer():
     os.system("cls")
     print("LAGERLISTE")
     strek()
-    valg = input(" Velg mellom: A) Vis alle Varer, B) Elektronikk, C) Kontor, D) Klaer")
+    valg = input(" Velg mellom: \n A) Vis alle Varer \n B) Elektronikk \n C) Kontor \n D) Klaer \n")
     if valg == "A" or valg == "a":
         sql_statement = "SELECT * FROM varer"
         mycursor.execute(sql_statement)
@@ -112,7 +123,7 @@ def alle_varer():
             print("Ingen varer funnet")
     
     
-    input("Press enter to continue")
+    input("Trykk enter for å fortsette")
      
 
 def finn_en_vare():
@@ -128,7 +139,7 @@ def finn_en_vare():
     else:
         print("Ingen varer funnet med det varenummeret.")
     
-    input("Press enter to continue")
+    input("Trykk enter for å fortsette")
     
 
 def Oppdater_en_vare():
@@ -143,7 +154,7 @@ def Oppdater_en_vare():
     mycursor.execute(sql_statement, (navn, pris, antall, varenummer))
     dbconn.commit()
     
-    input("Press enter to continue")
+    input("Trykk enter for å fortsette")
   
 def slett_vare():
     os.system("cls")
@@ -156,36 +167,70 @@ def slett_vare():
     else:
         print("Ingen varer funnet med det varenummeret.")
     
-    input("Press enter to continue")
+    input("Trykk enter for å fortsette")
 
+def inloggin():
+    os.system("cls")
+    strek()
+    print("Velkommen til Varehaandteringssystemet")
+    strek()
+    print("Logg inn med brukernavn og passord")
+    strek()
+    username = input("Brukernavn:")
+    Password = input("Passord:")
+    return username, Password
 
-
-
-while True:
-    userinput = print_ui()
+login = True
+while login:
+    username, Password = inloggin()
     
-    if userinput == "1":
-        ny_vare()
-        
-        
-    elif userinput == "2":
-        alle_varer()
-        
+    if username == "admin" and Password == "admin":
+        login = False
+        while True:
+            userinput = print_ui()
             
-    elif userinput == "3":
-        finn_en_vare()
-            
-            
-    elif userinput == "4":
-        Oppdater_en_vare()
-        
-    elif userinput == "5":
-        slett_vare()
+            if userinput == "1":
+                ny_vare()
+                
+                
+            elif userinput == "2":
+                alle_varer()
+                
+                    
+            elif userinput == "3":
+                finn_en_vare()
+                    
+                    
+            elif userinput == "4":
+                Oppdater_en_vare()
+                
+            elif userinput == "5":
+                slett_vare()
 
 
-    elif userinput == "6":
-        print("Avslutter")
-        quit()
-    else: 
-        print(" Ugyldig valg")
+            elif userinput == "6":
+                print("Avslutter")
+                quit()
+            else: 
+                print(" Ugyldig valg")
 
+
+    elif username == "guest" and Password == "guest":
+       while True:
+        login = False
+        userinput = print_ui_guest()
+        
+        
+        if userinput == "1":
+                alle_varer()
+                
+        elif userinput == "2":
+            finn_en_vare()       
+                
+        elif userinput == "3":
+            print("Avslutter")
+            quit()
+                
+    else:
+        print("Ugyldig brukernavn eller passord")
+        
