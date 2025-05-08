@@ -8,7 +8,7 @@ import os
 
 # dbconn.commit()
 
-def print_ui():
+def print_ui(): # Lager en funksjon for admin bruker 
     os.system("cls")
     print("--------------------------------------------------------------")
     print("Velkommen til Varehaandteringssystemet")
@@ -22,7 +22,7 @@ def print_ui():
     userinput = input("Velg mellom 1-6: ")
     return userinput
 
-def print_ui_guest():
+def print_ui_guest(): # Lager en funksjon for gjestebruker
     os.system("cls")
     print("--------------------------------------------------------------")
     print("Velkommen til Varehaandteringssystemet")
@@ -33,12 +33,12 @@ def print_ui_guest():
     userinput = input("Velg mellom 1-3: ")
     return userinput
 
-def strek():
+def strek(): # BAre en strek for å skille mellom tekst
     print("--------------------------------------------------------------")
 
 def ny_vare():
-    os.system("cls")
-    varenummer = input("Varenummer:")
+    os.system("cls") # tømmer terminalen
+    varenummer = input("Varenummer:") #Input fra bruker
     navn = input("Navn:")
     pris = input("Pris:")
     antall = input("Antall:")
@@ -50,9 +50,9 @@ def ny_vare():
     elif katagori == "C" or katagori == "c":
         katagori = "Klaer"
     
-    sql_statement = "INSERT INTO varer (varenummer, navn, pris, antall, katogori) VALUES (%s, %s, %s, %s, %s)"
-    valus = (varenummer, navn, pris, antall, katagori)
-    mycursor.execute(sql_statement, valus)
+    sql_statement = "INSERT INTO varer (varenummer, navn, pris, antall, katogori) VALUES (%s, %s, %s, %s, %s)" # Hva som skal legges inn i databasen
+    valus = (varenummer, navn, pris, antall, katagori) # verdiene som skal legges inn i databasen
+    mycursor.execute(sql_statement, valus) # Sender til databasen
     dbconn.commit()
 
 def alle_varer():
