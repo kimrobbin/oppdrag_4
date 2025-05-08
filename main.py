@@ -184,10 +184,11 @@ login = True
 while login:
     username, Password = inloggin()
     
-    if username == "admin" and Password == "admin":
+    if username == "admin" and Password == "admin": # Admin bruker
         login = False
         while True:
             userinput = print_ui()
+            
             
             if userinput == "1":
                 ny_vare()
@@ -215,7 +216,7 @@ while login:
                 print(" Ugyldig valg")
 
 
-    elif username == "guest" and Password == "guest":
+    elif username == "guest" and Password == "guest": # Gjestebruker
        while True:
         login = False
         userinput = print_ui_guest()
