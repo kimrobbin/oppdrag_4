@@ -43,10 +43,13 @@ def ny_vare():
     pris = input("Pris:")
     antall = input("Antall:")
     katagori = input(" A) Elektonikk B) kontor C) Klaer")
+    
     if katagori == "A" or katagori =="a":
         katagori = "Elektronikk"
+        
     elif katagori == "B" or katagori == "b":
         katagori = "Kontor"
+        
     elif katagori == "C" or katagori == "c":
         katagori = "Klaer"
     
@@ -125,13 +128,13 @@ def alle_varer():
     
     input("Trykk enter for å fortsette")
      
-
 def finn_en_vare():
     os.system("cls")
     varenummer = input("Varenummer:")
     sql_statement = "SELECT * FROM varer WHERE varenummer=%s"
     mycursor.execute(sql_statement, (varenummer,))
     result = mycursor.fetchall()
+    
     if result:
         for row in result:
             print(row)
@@ -141,7 +144,6 @@ def finn_en_vare():
     
     input("Trykk enter for å fortsette")
     
-
 def Oppdater_en_vare():
     os.system("cls")
     varenummer = input("Varenummer:")
@@ -162,6 +164,7 @@ def slett_vare():
     sql_statement = "DELETE FROM varer WHERE varenummer=%s"
     mycursor.execute(sql_statement, (varenummer,))
     dbconn.commit()
+    
     if mycursor.rowcount > 0:
         print("Vare slettet")
     else:
